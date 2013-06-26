@@ -11,12 +11,6 @@ SUB_URL = "http://www.gmanetwork.com/news/story/"
 current_page = ["307335"]
 trans_page = ""
 
-type = "news articles"
-
-url_eng, url_fil, title_eng, title_fil, body_eng, body_fil = ""
-
-
-
 current_page.each do |cp|
 
 	puts "starting to scrape #{SUB_URL+cp} \n please wait a moment . . ."
@@ -29,7 +23,6 @@ current_page.each do |cp|
 			puts trans_page = a['href'] if a.text.downcase.include?("basahin sa filipino")
 		end
 
-		puts trans_page.gsub(/[^0-9]/,"")
 
     doct = Nokogiri::HTML(open(BASE_URL+trans_page))
 		file = File.new("t_#{cp}", "w")
