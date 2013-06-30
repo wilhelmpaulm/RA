@@ -3,7 +3,17 @@ require 'nokogiri'
 require 'open-uri'
 require 'mysql'
 
-db = Mysql.new('127.0.0.1', 'root', '', 'webcrawler')
+begin
+localhost = File.open("localhost.txt", "a+").gets
+username = File.open("username.txt", "a+").gets
+password = File.open("password.txt", "a+").gets
+database = File.open("database.txt", "a+").gets
+
+
+
+
+	exit if Object.const_defined?(:Ocra)
+	db = Mysql.new("#{localhost}", "#{username}", "#{password}", "#{database}")
 l_page = "307335"
 BASE_URL = "http://www.gmanetwork.com"
 SUB_URL = "http://www.gmanetwork.com/news/story/"
@@ -49,3 +59,8 @@ limit = File.open("end.txt", "r+").gets
 	
 end
 db.close
+
+rescue Exception => e
+	puts e
+end
+
